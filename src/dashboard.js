@@ -114,7 +114,7 @@ const openPolicy = async (id) => {
             if (!res.ok) throw new Error('fetch failed');
             const data = await res.json();
             saveEditorDoc(data);
-            window.location.href = '/editor.html';
+            window.location.href = './editor.html';
             return;
         } catch (_) { /* fall through to stored data */ }
     }
@@ -206,7 +206,7 @@ const init = () => {
     $('btnCrear').addEventListener('click', (e) => {
         e.preventDefault();
         saveEditorDoc(null); // clear → new policy mode
-        window.location.href = '/editor.html';
+        window.location.href = './editor.html';
     });
 
 
