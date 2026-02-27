@@ -125,7 +125,7 @@ const openPolicy = async (id) => {
     }
 
     showToast('Abriendo editor…');
-    setTimeout(() => { window.location.href = '/editor.html'; }, 500);
+    setTimeout(() => { window.location.href = './editor.html'; }, 500);
 };
 
 /* ── Delete modal ─────────────────────────────────────────────── */
@@ -186,7 +186,7 @@ const setupImport = () => {
                 }
 
                 showToast('✓ Archivo importado. Abriendo editor…');
-                setTimeout(() => { window.location.href = '/editor.html'; }, 900);
+                setTimeout(() => { window.location.href = './editor.html'; }, 900);
             } catch (_) {
                 showToast('✗ JSON inválido. Verifica el archivo.');
             }

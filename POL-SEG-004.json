@@ -1,0 +1,48 @@
+{
+  "nombre": "Gestión de Incidentes de Seguridad",
+  "codigo": "POL-SEG-004",
+  "version": "1.2",
+  "fechaAprob": "2026-02-27",
+  "fechaVigor": "2026-02-27",
+  "responsable": "Responsable del SGSI",
+  "clasificacion": "Interno",
+  "proposito": "Establecer el procedimiento formal para la identificación, reporte, análisis, contención, erradicación y recuperación ante incidentes de seguridad de la información.\n\nLa presente política tiene como objetivo minimizar el impacto operativo, financiero y reputacional derivado de incidentes de seguridad, garantizando una respuesta oportuna, estructurada y documentada que permita la mejora continua del SGSI mediante la generación de lecciones aprendidas.",
+  "alcance": "Aplica a:\n- Todo el personal interno y contratistas.\n- Proveedores y terceros que gestionen o accedan a información institucional.\n- Sistemas, aplicaciones, infraestructura tecnológica y redes.\n- Información en formato digital, físico o verbal.\n\nIncluye incidentes reales o sospechosos que afecten la confidencialidad, integridad o disponibilidad de la información.",
+  "marco": "Referencias y marco normativo aplicable:\n- ISO/IEC 27001.\n- ISO/IEC 27002.\n- ISO/IEC 27035 (Gestión de Incidentes).\n- Legislación nacional aplicable en materia de protección de datos.\n- Procedimientos internos del SGSI relacionados con continuidad del negocio y gestión de riesgos.",
+  "definiciones": "Definiciones:\n- Incidente de seguridad: Evento o conjunto de eventos no deseados que comprometen o pueden comprometer la seguridad de la información.\n- Evento de seguridad: Ocurrencia identificada en un sistema o red que puede indicar una posible violación de políticas.\n- Contención: Acciones inmediatas destinadas a limitar el impacto del incidente.\n- Erradicación: Eliminación de la causa raíz del incidente.\n- Recuperación: Restauración segura de sistemas y servicios afectados.\n- Escalamiento: Proceso de notificación a niveles superiores según criticidad del incidente.",
+  "roles": "Roles y responsabilidades:\n- Alta dirección: Aprobar la política y apoyar decisiones estratégicas ante incidentes críticos.\n- Responsable del SGSI: Coordinar la gestión del incidente, supervisar investigación y reportar a la alta dirección.\n- Equipo de TI: Ejecutar acciones técnicas de contención, erradicación y recuperación.\n- Usuarios finales: Reportar inmediatamente cualquier evento sospechoso.\n- Comité de Seguridad (cuando aplique): Evaluar incidentes críticos y definir medidas estratégicas.\n- Proveedores: Notificar incidentes que afecten servicios contratados y colaborar en su resolución.",
+  "cumplimiento": "Todo incidente deberá ser reportado inmediatamente a través de los canales oficiales establecidos.\n\nLa organización definirá tiempos máximos de respuesta según la criticidad del incidente (bajo, medio, alto, crítico).\n\nEl incumplimiento en el reporte oportuno o en la gestión adecuada podrá derivar en medidas disciplinarias conforme a la normativa interna.",
+  "revision": "La política deberá revisarse al menos una vez al año o cuando ocurra alguno de los siguientes eventos:\n- Incidentes significativos que revelen debilidades en el proceso.\n- Cambios regulatorios relevantes.\n- Actualización de estándares internacionales.\n- Resultados de auditorías internas o externas.\n\nLa revisión será coordinada por el Responsable del SGSI y aprobada por la alta dirección.",
+  "lineamientos": [
+    "Todo evento sospechoso deberá ser reportado de forma inmediata mediante los canales oficiales.",
+    "Se deberá clasificar cada incidente según su nivel de impacto y criticidad.",
+    "Se establecerán tiempos máximos de respuesta para cada categoría de incidente.",
+    "Se deberán ejecutar acciones inmediatas de contención para minimizar el impacto.",
+    "Se deberá identificar y eliminar la causa raíz del incidente antes de restaurar completamente los servicios.",
+    "Se deberá documentar cada incidente en un registro formal con evidencia técnica.",
+    "Se deberán generar informes posteriores al incidente (post-mortem) con lecciones aprendidas.",
+    "Se deberán implementar acciones correctivas y preventivas para evitar recurrencias.",
+    "Se deberán realizar simulacros periódicos de gestión de incidentes.",
+    "Los incidentes críticos deberán escalarse a la alta dirección de manera inmediata."
+  ],
+  "versiones": [
+    {
+      "v": "1.0",
+      "f": "2025-08-15",
+      "d": "Emisión inicial de la Política de Gestión de Incidentes de Seguridad.",
+      "r": "Responsable del SGSI"
+    },
+    {
+      "v": "1.1",
+      "f": "2025-11-10",
+      "d": "Actualización para incluir tiempos máximos de respuesta y mecanismos formales de escalamiento.",
+      "r": "Responsable del SGSI"
+    },
+    {
+      "v": "1.2",
+      "f": "2026-02-27",
+      "d": "Incorporación de lineamientos sobre simulacros periódicos y documentación de lecciones aprendidas.",
+      "r": "Responsable del SGSI"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "nombre": "Desarrollo Seguro de Software",
+  "codigo": "POL-SEG-003",
+  "version": "1.0",
+  "fechaAprob": "2026-02-27",
+  "fechaVigor": "2026-02-27",
+  "responsable": "Responsable del SGSI",
+  "clasificacion": "Interno",
+  "proposito": "Definir los lineamientos obligatorios para garantizar la seguridad durante todo el ciclo de vida de desarrollo de software (SDLC), asegurando que las aplicaciones desarrolladas o adquiridas por la organización incorporen controles de seguridad desde su diseño hasta su puesta en producción.\n\nLa presente política busca prevenir vulnerabilidades, reducir riesgos asociados a amenazas como inyección SQL, XSS y otras vulnerabilidades de aplicaciones web, y asegurar la protección de la información procesada por los sistemas institucionales.",
+  "alcance": "Aplica a:\n- Todo desarrollo de software interno.\n- Aplicaciones web, móviles, APIs y sistemas empresariales.\n- Software adquirido o desarrollado por terceros para la organización.\n- Entornos de desarrollo, pruebas y producción.\n\nIncluye todas las fases del ciclo de vida: análisis, diseño, desarrollo, pruebas, implementación, mantenimiento y retiro del sistema.",
+  "marco": "Referencias y marco normativo aplicable:\n- ISO/IEC 27001.\n- ISO/IEC 27002.\n- OWASP Top 10.\n- Legislación nacional aplicable en materia de protección de datos.\n- Políticas internas del SGSI relacionadas con gestión de cambios y control de accesos.",
+  "definiciones": "Definiciones:\n- Desarrollo seguro: Enfoque de desarrollo que integra controles de seguridad desde las primeras etapas del ciclo de vida del software.\n- Validación de entradas: Proceso de verificación de datos ingresados por el usuario para evitar comportamientos no deseados o maliciosos.\n- Consultas parametrizadas: Técnica de acceso a bases de datos que separa datos de la lógica SQL para prevenir inyección.\n- Pruebas de vulnerabilidad: Evaluaciones técnicas automatizadas o manuales para identificar debilidades en el sistema.\n- Pruebas de penetración: Simulación controlada de ataques para evaluar la efectividad de los controles de seguridad.\n- WAF (Web Application Firewall): Mecanismo de protección que filtra y monitorea el tráfico HTTP/HTTPS hacia aplicaciones web.",
+  "roles": "Roles y responsabilidades:\n- Alta dirección: Aprobar la política y asignar recursos para su implementación.\n- Responsable del SGSI: Supervisar el cumplimiento y coordinar evaluaciones periódicas.\n- Equipo de Desarrollo: Implementar prácticas de codificación segura, validación de entradas y uso de consultas parametrizadas.\n- Equipo de Seguridad: Realizar revisiones de código, pruebas de vulnerabilidad y pruebas de penetración.\n- Área de TI: Implementar controles de protección en infraestructura, incluyendo WAF y monitoreo.\n- Proveedores externos: Cumplir los estándares de desarrollo seguro establecidos contractualmente.",
+  "cumplimiento": "El cumplimiento de esta política es obligatorio para todo proyecto de desarrollo dentro del alcance. Antes de pasar a producción, las aplicaciones deberán haber superado revisiones de código y pruebas de seguridad.\n\nEl incumplimiento podrá derivar en la suspensión de la liberación del sistema, acciones correctivas obligatorias y medidas disciplinarias conforme a la normativa interna.",
+  "revision": "La política deberá revisarse al menos una vez al año o cuando ocurra alguno de los siguientes eventos:\n- Identificación de nuevas vulnerabilidades críticas.\n- Incidentes de seguridad relacionados con aplicaciones.\n- Cambios en estándares internacionales de seguridad.\n- Implementación de nuevas tecnologías de desarrollo.\n\nLa revisión será coordinada por el Responsable del SGSI y requerirá aprobación de la alta dirección.",
+  "lineamientos": [
+    "La seguridad deberá integrarse desde la fase de análisis y diseño (Security by Design).",
+    "Se deberá aplicar validación estricta de todas las entradas del usuario.",
+    "Será obligatorio el uso de consultas parametrizadas o mecanismos equivalentes para prevenir inyección SQL.",
+    "Se deberán realizar revisiones de código antes de la liberación a producción.",
+    "Se deberán ejecutar pruebas de vulnerabilidad de forma periódica.",
+    "Se deberán realizar pruebas de penetración al menos una vez al año o antes de sistemas críticos en producción.",
+    "Se deberá implementar un Web Application Firewall (WAF) para proteger aplicaciones web expuestas a Internet.",
+    "Se deberán separar adecuadamente los entornos de desarrollo, pruebas y producción.",
+    "Los cambios en código deberán gestionarse mediante control de versiones y procedimientos formales de gestión de cambios.",
+    "Se deberán documentar hallazgos de seguridad y aplicar acciones correctivas antes de la puesta en producción."
+  ],
+  "versiones": [
+    {
+      "v": "1.0",
+      "f": "2026-02-27",
+      "d": "Emisión inicial de la Política de Desarrollo Seguro.",
+      "r": "Responsable del SGSI"
+    }
+  ]
+}
