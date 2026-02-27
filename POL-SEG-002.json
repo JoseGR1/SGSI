@@ -1,0 +1,36 @@
+{
+  "nombre": "Control de Accesos",
+  "codigo": "POL-SEG-002",
+  "version": "1.0",
+  "fechaAprob": "2026-02-27",
+  "fechaVigor": "2026-02-27",
+  "responsable": "Responsable del SGSI",
+  "clasificacion": "Interno",
+  "proposito": "Establecer los lineamientos para la asignación, modificación, revisión y revocación de privilegios de acceso a los sistemas de información de la organización, con el fin de proteger la confidencialidad, integridad y disponibilidad de los activos de información.\n\nLa política se fundamenta en el principio de mínimo privilegio y en la segregación de funciones, garantizando que cada usuario disponga únicamente de los accesos estrictamente necesarios para el desempeño de sus funciones.",
+  "alcance": "La presente política aplica a:\n- Todo el personal interno, incluyendo empleados, contratistas y personal temporal.\n- Proveedores y terceros con acceso a sistemas o información institucional.\n- Todos los sistemas de información, aplicaciones, bases de datos, redes, dispositivos y servicios tecnológicos utilizados por la organización.\n\nIncluye accesos físicos y lógicos, tanto en entornos locales como en la nube.",
+  "marco": "Referencias y marco normativo aplicable:\n- ISO/IEC 27001 (Controles de gestión de accesos).\n- ISO/IEC 27002.\n- Buenas prácticas de seguridad en autenticación y gestión de identidades.\n- Políticas internas del SGSI relacionadas con seguridad de la información.",
+  "definiciones": "Definiciones:\n- Control de acceso: Conjunto de mecanismos que limitan el acceso a sistemas y recursos únicamente a usuarios autorizados.\n- Mínimo privilegio: Principio según el cual un usuario solo debe tener los accesos estrictamente necesarios para cumplir sus funciones.\n- Segregación de funciones: Separación de responsabilidades críticas para reducir el riesgo de fraude o error.\n- Cuenta privilegiada: Cuenta con permisos elevados sobre sistemas o información crítica.\n- MFA (Autenticación Multifactor): Mecanismo que requiere dos o más factores de autenticación para validar la identidad del usuario.",
+  "roles": "Roles y responsabilidades:\n- Alta dirección: Aprobar la política y garantizar la asignación de recursos para su implementación.\n- Responsable del SGSI: Supervisar el cumplimiento de la política y coordinar revisiones periódicas.\n- Área de Tecnología de la Información: Gestionar técnicamente la creación, modificación, desactivación y monitoreo de cuentas.\n- Líderes de área: Autorizar solicitudes de acceso conforme a funciones laborales.\n- Usuarios: Utilizar sus credenciales de forma responsable y reportar cualquier acceso indebido o incidente.",
+  "cumplimiento": "El cumplimiento de esta política es obligatorio para todos los usuarios dentro del alcance. Se realizarán revisiones periódicas de accesos y auditorías internas para verificar la correcta asignación de privilegios.\n\nEl incumplimiento podrá resultar en sanciones disciplinarias conforme a la normativa interna, incluyendo la suspensión o revocación de accesos. En el caso de terceros, podrá implicar medidas contractuales o legales.",
+  "revision": "La política deberá revisarse al menos una vez al año o cuando ocurran cambios significativos en la infraestructura tecnológica, en la estructura organizacional o tras incidentes de seguridad relacionados con accesos indebidos.\n\nLa revisión será responsabilidad del Responsable del SGSI y deberá contar con aprobación formal de la alta dirección.",
+  "lineamientos": [
+    "Todo acceso a sistemas de información deberá estar debidamente autorizado por el responsable del área correspondiente.",
+    "La asignación de accesos deberá documentarse y registrarse formalmente.",
+    "Se aplicará el principio de mínimo privilegio en la creación y mantenimiento de cuentas.",
+    "Se deberá implementar segregación de funciones en procesos críticos.",
+    "Las cuentas administrativas y aquellas con acceso a información sensible deberán utilizar autenticación multifactor (MFA).",
+    "Las cuentas inactivas por un periodo superior al definido por la organización deberán ser deshabilitadas automáticamente.",
+    "Los accesos deberán revisarse periódicamente para verificar su vigencia y pertinencia.",
+    "Los accesos deberán revocarse inmediatamente cuando un colaborador cambie de rol o finalice su relación laboral.",
+    "Queda prohibido el uso de cuentas genéricas compartidas, salvo autorización formal y controles compensatorios.",
+    "Se deberá mantener registro de eventos relevantes relacionados con autenticación y acceso para fines de auditoría."
+  ],
+  "versiones": [
+    {
+      "v": "1.0",
+      "f": "2026-02-27",
+      "d": "Emisión inicial de la Política de Control de Accesos.",
+      "r": "Responsable del SGSI"
+    }
+  ]
+}

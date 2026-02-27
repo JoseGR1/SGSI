@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Editor de Política – SGSI</title>
+    <meta name="description" content="Editor de políticas SGSI con previsualización en tiempo real." />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script type="module" src="/src/editor.js"></script>
+</head>
+
+<body>
+
+    <!-- Background orbs (visible through sidebar/editor glass) -->
+    <div class="bg-orbs" aria-hidden="true">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+    </div>
+
+    <div class="editor-layout">
+
+        <!-- ═══════════════════════════════════
+         TOPBAR
+    ═══════════════════════════════════ -->
+        <header class="topbar">
+            <!-- Brand -->
+            <div class="topbar-brand">
+                <div class="logo">SG</div>
+                <div>
+                    <div class="topbar-title">Editor de Política</div>
+                    <div class="topbar-sub">Vista previa en tiempo real</div>
+                </div>
+            </div>
+
+            <!-- Action groups -->
+            <div class="topbar-actions">
+                <!-- Navigation -->
+                <a href="/" class="btn-back">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+
+                <div class="action-divider"></div>
+
+                <!-- Export actions -->
+                <button class="topbar-btn pdf" id="btnPrint">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 6 2 18 2 18 9" />
+                        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                        <rect x="6" y="14" width="12" height="8" />
+                    </svg>
+                    <span>Guardar PDF</span>
+                </button>
+                <button class="topbar-btn export" id="btnExport">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    <span>Exportar JSON</span>
+                </button>
+                <button class="topbar-btn import" id="btnImport">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="17 8 12 3 7 8" />
+                        <line x1="12" y1="3" x2="12" y2="15" />
+                    </svg>
+                    <span>Importar</span>
+                </button>
+
+                <div class="action-divider"></div>
+
+                <!-- Save to history -->
+                <button class="topbar-btn save" id="btnSaveHistory">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                        <polyline points="17 21 17 13 7 13 7 21" />
+                        <polyline points="7 3 7 8 15 8" />
+                    </svg>
+                    <span>Guardar en historial</span>
+                </button>
+                <button class="topbar-btn reset" id="btnReset">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6" />
+                        <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                    </svg>
+                    <span>Limpiar</span>
+                </button>
+            </div>
+        </header>
+
+        <div class="editor-main">
+
+            <!-- ═══════════════════════════════════
+           LEFT SIDEBAR – section jump nav
+      ═══════════════════════════════════ -->
+            <nav class="editor-sidebar" aria-label="Navegación de secciones">
+                <div class="sidebar-label">Secciones</div>
+
+                <button class="nav-item active" data-target="sec-encabezado">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                    Encabezado
+                </button>
+                <button class="nav-item" data-target="sec-proposito">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="8" x2="12" y2="12" />
+                        <line x1="12" y1="16" x2="12.01" y2="16" />
+                    </svg>
+                    Propósito
+                </button>
+                <button class="nav-item" data-target="sec-alcance">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3" />
+                        <path
+                            d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+                    </svg>
+                    Alcance
+                </button>
+                <button class="nav-item" data-target="sec-marco">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                    </svg>
+                    Marco normativo
+                </button>
+                <button class="nav-item" data-target="sec-definiciones">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="4" y1="9" x2="20" y2="9" />
+                        <line x1="4" y1="15" x2="20" y2="15" />
+                        <line x1="10" y1="3" x2="8" y2="21" />
+                        <line x1="16" y1="3" x2="14" y2="21" />
+                    </svg>
+                    Definiciones
+                </button>
+                <button class="nav-item" data-target="sec-roles">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                    Roles
+                </button>
+                <button class="nav-item" data-target="sec-lineamientos">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="8" y1="6" x2="21" y2="6" />
+                        <line x1="8" y1="12" x2="21" y2="12" />
+                        <line x1="8" y1="18" x2="21" y2="18" />
+                        <line x1="3" y1="6" x2="3.01" y2="6" />
+                        <line x1="3" y1="12" x2="3.01" y2="12" />
+                        <line x1="3" y1="18" x2="3.01" y2="18" />
+                    </svg>
+                    Lineamientos
+                </button>
+                <button class="nav-item" data-target="sec-cumplimiento">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                        <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                    Cumplimiento
+                </button>
+                <button class="nav-item" data-target="sec-revision">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    Revisión
+                </button>
+                <button class="nav-item" data-target="sec-versiones">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="16 3 21 3 21 8" />
+                        <line x1="4" y1="20" x2="21" y2="3" />
+                        <polyline points="21 16 21 21 16 21" />
+                        <line x1="15" y1="15" x2="21" y2="21" />
+                    </svg>
+                    Control de vers.
+                </button>
+            </nav>
+
+            <!-- ═══════════════════════════════════
+           CENTER – EDITOR FORM
+      ═══════════════════════════════════ -->
+            <main class="editor-panel" id="editorPanel">
+
+                <!-- 1. Encabezado -->
+                <div class="form-section" id="sec-encabezado">
+                    <div class="section-head">
+                        <div class="section-title-text">
+                            <div class="section-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                    <line x1="16" y1="2" x2="16" y2="6" />
+                                    <line x1="8" y1="2" x2="8" y2="6" />
+                                    <line x1="3" y1="10" x2="21" y2="10" />
+                                </svg>
+                            </div>
+                            <h3>Encabezado de identificación</h3>
+                        </div>
+                    </div>
+                    <div class="section-body">
+                        <div class="form-row">
+                            <label class="form-label">Nombre de la política</label>
+                            <div class="form-control-wrap"><input id="nombre" type="text"
+                                    placeholder="Ej.: Control de Acceso" /></div>
+                        </div>
+                        <div class="form-row">
+                            <label class="form-label">Código de documento</label>
+                            <div class="form-control-wrap"><input id="codigo" type="text"
+                                    placeholder="Ej.: POL-SEG-001" /></div>
+                        </div>
+                        <div class="form-row">
+                            <label class="form-label">Versión</label>
+                            <div class="form-control-wrap"><input id="version" type="text" placeholder="Ej.: 1.0" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label class="form-label">Fecha de aprobación</label>
+                            <div class="form-control-wrap"><input id="fechaAprob" type="date" /></div>
+                        </div>
+                        <div class="form-row">
+                            <label class="form-label">Fecha de entrada en vigor</label>
+                            <div class="form-control-wrap"><input id="fechaVigor" type="date" /></div>
+                        </div>
+                        <div class="form-row">
+                            <label class="form-label">Responsable del documento</label>
+                            <div class="form-control-wrap"><input id="responsable" type="text"
+                                    placeholder="Ej.: José González" /></div>
+                        </div>
+                        <div class="form-row">
+                            <label class="form-label">Clasificación</label>
+                            <div class="form-control-wrap">
+                                <select id="clasificacion">
+                                    <option value="">(Opcional)</option>
+                                    <option>Interno</option>
+                                    <option>Confidencial</option>
+                                    <option>Restringido</option>
+                                    <option>Público</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Propósito -->
+                <div class="form-section" id="sec-proposito">
+                    <div class="section-head">
+                        <div class="section-title-text">
+                            <div class="section-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <line x1="12" y1="8" x2="12" y2="12" />
+                                    <line x1="12" y1="16" x2="12.01" y2="16" />
+                                </svg>
+                            </div>
+                            <h3>Propósito</h3>
+                        </div>
+                    </div>
+                    <div class="section-body">
+                        <textarea id="proposito"
+                            placeholder="Describe la finalidad y el riesgo que busca mitigar..."></textarea>
+                    </div>
+                </div>
+
+                <!-- 3. Alcance -->
+                <div class="form-section" id="sec-alcance">
+                    <div class="section-head">
+                        <div class="section-title-text">
+                            <div class="section-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="3" />
+                                    <path
+                                        d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+                                </svg>
+                            </div>
+                            <h3>Alcance</h3>
+                        </div>
+                    </div>
+                    <div class="section-body">
+                        <textarea id="alcance"
+                            placeholder="Define a quién aplica y qué sistemas/activos incluye..."></textarea>
+                    </div>
+                </div>
+
+                <!-- 4. Marco normativo -->
+                <div class="form-section" id="sec-marco">
+                    <div class="section-head">
+                        <div class="section-title-text">
+                            <div class="section-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                                </svg>
+                            </div>
+                            <h3>Marco normativo y referencias</h3>
+                        </div>
+                    </div>
+                    <div class="section-body">
+                        <textarea id="marco"
+                            placeholder="ISO/IEC 27001, ISO/IEC 27002, PCI-DSS, legislación aplicable..."></textarea>
+                    </div>
+                </div>
+
+                <!-- 5. Definiciones -->
+                <div class="form-section" id="sec-definiciones">
+                    <div class="section-head">
+                        <div class="section-title-text">
+                            <div class="section-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <line x1="4" y1="9" x2="20" y2="9" />
+                                    <line x1="4" y1="15" x2="20" y2="15" />
+                                    <line x1="10" y1="3" x2="8" y2="21" />
+                                    <line x1="16" y1="3" x2="14" y2="21" />
+                                </svg>
+                            </div>
+                            <h3>Definiciones</h3>
+                        </div>
+                    </div>
+                    <div class="section-body">
+                        <textarea id="definiciones"
+                            placeholder="MFA, mínimo privilegio, cuenta privilegiada..."></textarea>
+                    </div>
+                </div>
+
+                <!-- 6. Roles -->
+                <div class="form-section" id="sec-roles">
+                    <div class="section-head">
+                        <div class="section-title-text">
+                            <div class="section-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                </svg>
+                            </div>
+                            <h3>Roles y responsabilidades</h3>
+                        </div>
+                    </div>
+                    <div class="section-body">
+                        <textarea id="roles"
+                            placeholder="Alta dirección, Responsable SGSI, TI, usuarios, terceros..."></textarea>
+                    </div>
+                </div>
+
+                <!-- 7. Lineamientos -->
+                <div class="form-section" id="sec-lineamientos">
+                    <div class="section-head">
+                        <div class="section-title-text">
+                            <div class="section-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <line x1="8" y1="6" x2="21" y2="6" />
+                                    <line x1="8" y1="12" x2="21" y2="12" />
+                                    <line x1="8" y1="18" x2="21" y2="18" />
+                                    <line x1="3" y1="6" x2="3.01" y2="6" />
+                                    <line x1="3" y1="12" x2="3.01" y2="12" />
+                                    <line x1="3" y1="18" x2="3.01" y2="18" />
+                                </svg>
+                            </div>
+                            <h3>Lineamientos o directrices</h3>
+                        </div>
+                        <div class="sec-actions">
+                            <button class="sec-btn add" id="btnAddLineamiento">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <line x1="12" y1="5" x2="12" y2="19" />
+                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                </svg>
+                                Agregar
+                            </button>
+                            <button class="sec-btn clear" id="btnClearLineamientos">Vaciar</button>
+                        </div>
+                    </div>
+                    <div class="section-body" id="lineamientosBox"></div>
+                </div>
+
+                <!-- 8. Cumplimiento -->
+                <div class="form-section" id="sec-cumplimiento">
+                    <div class="section-head">
+                        <div class="section-title-text">
+                            <div class="section-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                    <polyline points="22 4 12 14.01 9 11.01" />
+                                </svg>
+                            </div>
+                            <h3>Cumplimiento y sanciones</h3>
+                        </div>
+                    </div>
+                    <div class="section-body">
+                        <textarea id="cumplimiento"
+                            placeholder="Auditoría, supervisión, consecuencias por incumplimiento..."></textarea>
+                    </div>
+                </div>
+
+                <!-- 9. Revisión -->
+                <div class="form-section" id="sec-revision">
+                    <div class="section-head">
+                        <div class="section-title-text">
+                            <div class="section-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <polyline points="12 6 12 12 16 14" />
+                                </svg>
+                            </div>
+                            <h3>Procedimiento de revisión</h3>
+                        </div>
+                    </div>
+                    <div class="section-body">
+                        <textarea id="revision"
+                            placeholder="Periodicidad, condiciones de actualización, autoridad de aprobación..."></textarea>
+                    </div>
+                </div>
+
+                <!-- 10. Control de versiones -->
+                <div class="form-section" id="sec-versiones">
+                    <div class="section-head">
+                        <div class="section-title-text">
+                            <div class="section-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <polyline points="16 3 21 3 21 8" />
+                                    <line x1="4" y1="20" x2="21" y2="3" />
+                                    <polyline points="21 16 21 21 16 21" />
+                                    <line x1="15" y1="15" x2="21" y2="21" />
+                                </svg>
+                            </div>
+                            <h3>Control de versiones</h3>
+                        </div>
+                        <div class="sec-actions">
+                            <button class="sec-btn add" id="btnAddVersion">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <line x1="12" y1="5" x2="12" y2="19" />
+                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                </svg>
+                                Fila
+                            </button>
+                            <button class="sec-btn clear" id="btnClearVersions">Vaciar</button>
+                        </div>
+                    </div>
+                    <div class="section-body version-table-wrap">
+                        <table class="vtable" id="versionTable">
+                            <thead>
+                                <tr>
+                                    <th style="width:80px">Versión</th>
+                                    <th style="width:130px">Fecha</th>
+                                    <th>Descripción del cambio</th>
+                                    <th style="width:160px">Responsable</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </main><!-- /.editor-panel -->
+
+            <!-- ═══════════════════════════════════
+           RIGHT – LIVE PREVIEW
+      ═══════════════════════════════════ -->
+            <aside class="preview-panel" id="preview">
+                <div class="preview-sticky-label">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>
+                    Vista previa del documento
+                </div>
+
+                <div class="docHeader">
+                    <div class="docHeaderLeft">
+                        <h3 id="pv_title">POLÍTICA DE __________________</h3>
+                        <p class="docSubtitle">Sistema de Gestión de Seguridad de la Información (SGSI)</p>
+                    </div>
+                    <div class="docHeaderRight">
+                        <div><strong>Código:</strong> <span id="pv_codigo">—</span></div>
+                        <div><strong>Versión:</strong> <span id="pv_version">—</span></div>
+                        <div><strong>Aprobación:</strong> <span id="pv_aprob">—</span></div>
+                        <div><strong>Vigencia:</strong> <span id="pv_vigor">—</span></div>
+                        <div><strong>Responsable:</strong> <span id="pv_resp">—</span></div>
+                        <div><strong>Clasificación:</strong> <span id="pv_clas">—</span></div>
+                    </div>
+                </div>
+
+                <div class="docBody">
+                    <div class="psec">
+                        <h4>Propósito</h4>
+                        <div class="txt" id="pv_proposito">—</div>
+                    </div>
+                    <div class="psec">
+                        <h4>Alcance</h4>
+                        <div class="txt" id="pv_alcance">—</div>
+                    </div>
+                    <div class="psec">
+                        <h4>Marco normativo y referencias</h4>
+                        <div class="txt" id="pv_marco">—</div>
+                    </div>
+                    <div class="psec">
+                        <h4>Definiciones</h4>
+                        <div class="txt" id="pv_defs">—</div>
+                    </div>
+                    <div class="psec">
+                        <h4>Roles y responsabilidades</h4>
+                        <div class="txt" id="pv_roles">—</div>
+                    </div>
+                    <div class="psec">
+                        <h4>Lineamientos o directrices</h4>
+                        <ol class="pbullets" id="pv_lineamientos"></ol>
+                    </div>
+                    <div class="psec">
+                        <h4>Cumplimiento y sanciones</h4>
+                        <div class="txt" id="pv_cumpl">—</div>
+                    </div>
+                    <div class="psec">
+                        <h4>Procedimiento de revisión</h4>
+                        <div class="txt" id="pv_rev">—</div>
+                    </div>
+                    <div class="psec">
+                        <h4>Control de versiones</h4>
+                        <div id="pv_versions"></div>
+                    </div>
+                </div>
+
+                <div class="docFooter">
+                    <div>Documento SGSI • Política institucional</div>
+                    <div id="pv_stamp">Generado: —</div>
+                </div>
+            </aside>
+
+        </div><!-- /.editor-main -->
+
+    </div><!-- /.editor-layout -->
+
+    <!-- Mobile jump -->
+    <div class="mobileJump">
+        <button id="btnMobileJump">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+            </svg>
+            Vista previa
+        </button>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" aria-live="polite"></div>
+
+</body>
+
+</html>

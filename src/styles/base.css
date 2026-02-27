@@ -1,0 +1,338 @@
+/* ════════════════════════════════════════════
+   BASE — shared tokens, reset & components
+   Imported by both dashboard.css & editor.css
+════════════════════════════════════════════ */
+
+/* ── Google Fonts ─────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* ── Design Tokens ────────────────────────── */
+:root {
+    /* Background */
+    --bg1: #080e1f;
+    --bg2: #06122b;
+
+    /* Glass panels */
+    --panel: rgba(255, 255, 255, .055);
+    --panelHover: rgba(255, 255, 255, .09);
+    --border: rgba(255, 255, 255, .10);
+    --shadow: 0 20px 50px rgba(0, 0, 0, .22);
+    --radius: 18px;
+    --radiusSm: 12px;
+
+    /* Document (preview) */
+    --paper: #ffffff;
+    --ink: #0f172a;
+    --muted: #64748b;
+    --line: #e5e7eb;
+
+    /* Brand colours */
+    --accent: #2563eb;
+    --accent2: #3b82f6;
+    --green: #16a34a;
+    --green2: #22c55e;
+    --amber: #d97706;
+    --amber2: #f59e0b;
+    --red: #dc2626;
+    --red2: #ef4444;
+    --slate: #475569;
+    --slate2: #64748b;
+
+    /* Text */
+    --text: #e2e8f0;
+    --textMuted: rgba(226, 232, 240, .55);
+
+    /* Font */
+    --font: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+/* ── Reset ────────────────────────────────── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+}
+
+/* ── Body ─────────────────────────────────── */
+body {
+    font-family: var(--font);
+    background: var(--bg1);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ── Background orbs ──────────────────────── */
+.bg-orbs {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: .32;
+}
+
+.orb1 {
+    width: 700px;
+    height: 600px;
+    background: radial-gradient(circle, #1e3a8a, transparent 70%);
+    top: -150px;
+    left: -100px;
+    animation: drift1 18s ease-in-out infinite alternate;
+}
+
+.orb2 {
+    width: 600px;
+    height: 500px;
+    background: radial-gradient(circle, #1d4ed8, transparent 70%);
+    top: -80px;
+    right: -80px;
+    animation: drift2 22s ease-in-out infinite alternate;
+}
+
+.orb3 {
+    width: 500px;
+    height: 400px;
+    background: radial-gradient(circle, #0f2460, transparent 70%);
+    bottom: -100px;
+    left: 40%;
+    animation: drift3 26s ease-in-out infinite alternate;
+}
+
+@keyframes drift1 {
+    to {
+        transform: translate(60px, 80px);
+    }
+}
+
+@keyframes drift2 {
+    to {
+        transform: translate(-50px, 60px);
+    }
+}
+
+@keyframes drift3 {
+    to {
+        transform: translate(-80px, -40px);
+    }
+}
+
+/* ── Wrap ─────────────────────────────────── */
+.wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 20px 60px;
+}
+
+/* ── Buttons (shared) ──────────────────────── */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 10px 20px;
+    border-radius: var(--radiusSm);
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: filter .12s ease, transform .07s ease, background .14s ease;
+    border: none;
+    font-family: var(--font);
+}
+
+.btn:hover {
+    filter: brightness(1.09);
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, .35);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, var(--green), var(--green2));
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(22, 163, 74, .30);
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, var(--amber), var(--amber2));
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(217, 119, 6, .30);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, var(--red), var(--red2));
+    color: #fff;
+}
+
+.btn-ghost {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--textMuted);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--textMuted);
+}
+
+.btn-outline:hover {
+    background: var(--panelHover);
+    color: var(--text);
+}
+
+/* ── Section title ──────────────────────────── */
+.section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .9px;
+    color: var(--textMuted);
+    margin-bottom: 14px;
+}
+
+/* ── Toast ──────────────────────────────────── */
+.toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(16px);
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, .12);
+    color: var(--text);
+    padding: 12px 22px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .22s ease, transform .22s ease;
+    z-index: 9999;
+    white-space: nowrap;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ── Confirm modal ──────────────────────────── */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .65);
+    backdrop-filter: blur(4px);
+    display: grid;
+    place-items: center;
+    z-index: 9000;
+    padding: 20px;
+    animation: fadeIn .18s ease;
+}
+
+.modal-overlay[hidden] {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal {
+    background: #0f1e3d;
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 20px;
+    padding: 32px 28px;
+    max-width: 440px;
+    width: 100%;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, .45);
+    animation: slideUp .22s ease;
+    text-align: center;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(220, 38, 38, .15);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    margin: 0 auto 16px;
+    color: var(--red2);
+}
+
+.modal-icon.info {
+    background: rgba(37, 99, 235, .15);
+    color: var(--accent2);
+}
+
+.modal h3 {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #f1f5f9;
+}
+
+.modal p {
+    font-size: 14px;
+    color: var(--textMuted);
+    line-height: 1.55;
+    margin-bottom: 24px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}

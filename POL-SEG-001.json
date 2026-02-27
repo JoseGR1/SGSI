@@ -1,0 +1,36 @@
+{
+  "nombre": "Seguridad de la Información",
+  "codigo": "POL-SEG-001",
+  "version": "1.0",
+  "fechaAprob": "2026-02-27",
+  "fechaVigor": "2026-02-27",
+  "responsable": "Responsable del SGSI",
+  "clasificacion": "Interno",
+  "proposito": "Establecer el marco normativo general que rige la gestión de la seguridad de la información dentro de la organización, definiendo el compromiso formal de la alta dirección con la protección de los activos críticos y la responsabilidad compartida de todos los colaboradores en la preservación de la confidencialidad, integridad y disponibilidad de la información.\n\nLa presente política busca asegurar que la seguridad de la información forme parte integral de la gobernanza corporativa y de los procesos estratégicos del negocio, alineándose con los objetivos del SGSI y con los riesgos identificados en la evaluación de riesgos institucional.",
+  "alcance": "La presente política aplica a toda la organización, incluyendo:\n- Alta dirección.\n- Personal interno (colaboradores y contratistas).\n- Proveedores y terceros que accedan o gestionen información institucional.\n- Sistemas, aplicaciones, infraestructura tecnológica, redes y dispositivos que procesen o almacenen información.\n\nEl alcance incluye información en cualquier formato (digital, físico o verbal) y en cualquier fase de su ciclo de vida (creación, procesamiento, almacenamiento, transmisión y eliminación).",
+  "marco": "Referencias y marco normativo aplicable:\n- ISO/IEC 27001.\n- ISO/IEC 27002.\n- Legislación nacional aplicable en materia de protección de datos y comercio electrónico.\n- Políticas, procedimientos y lineamientos internos relacionados con el SGSI.",
+  "definiciones": "Definiciones:\n- Seguridad de la información: Protección de la información para preservar su confidencialidad, integridad y disponibilidad.\n- Confidencialidad: Propiedad de que la información no esté disponible ni sea divulgada a personas, entidades o procesos no autorizados.\n- Integridad: Propiedad de exactitud y completitud de la información.\n- Disponibilidad: Propiedad de ser accesible y utilizable cuando se requiera por una entidad autorizada.\n- Activo de información: Cualquier elemento que tenga valor para la organización y que deba ser protegido (datos, sistemas, personas, infraestructura, etc.).\n- SGSI: Sistema de Gestión de Seguridad de la Información.",
+  "roles": "Roles y responsabilidades:\n- Alta dirección: Aprobar la política, asignar recursos, promover la cultura de seguridad y exigir cumplimiento.\n- Responsable del SGSI: Mantener y actualizar la política, coordinar su implementación, monitorear cumplimiento y reportar hallazgos.\n- Área de Tecnología de la Información: Implementar controles técnicos, administrar accesos, respaldos, monitoreo y medidas de protección.\n- Usuarios finales: Cumplir la política, proteger credenciales, manejar la información conforme a su clasificación y reportar incidentes.\n- Terceros/proveedores: Cumplir los requisitos de seguridad establecidos contractualmente y aplicar controles equivalentes cuando corresponda.",
+  "cumplimiento": "El cumplimiento de la presente política es obligatorio para todo el personal y terceros dentro del alcance. La organización realizará revisiones, auditorías internas y monitoreo de controles para verificar su cumplimiento.\n\nEl incumplimiento podrá derivar en medidas disciplinarias conforme a la normativa interna y, cuando aplique, en acciones contractuales o legales para terceros. Los hallazgos relevantes deberán registrarse y gestionarse mediante planes de acción correctiva y preventiva.",
+  "revision": "La política deberá revisarse al menos una vez al año o cuando ocurra cualquiera de los siguientes eventos:\n- Incidentes de seguridad significativos.\n- Cambios regulatorios relevantes.\n- Implementación de nuevas tecnologías o cambios en la arquitectura.\n- Modificación sustancial del modelo de negocio o procesos críticos.\n- Identificación de nuevos riesgos críticos.\n\nLa revisión será coordinada por el Responsable del SGSI y requerirá aprobación formal de la alta dirección. Cualquier actualización deberá reflejarse en el control de versiones y comunicarse a las partes interesadas.",
+  "lineamientos": [
+    "La seguridad de la información deberá integrarse en la gobernanza corporativa y en los procesos estratégicos del negocio.",
+    "Todos los activos de información deberán inventariarse, clasificarse y protegerse conforme a su criticidad y sensibilidad.",
+    "El acceso a la información y a los sistemas deberá otorgarse únicamente bajo autorización, mínimo privilegio y necesidad de uso.",
+    "Se deberán implementar controles técnicos y organizativos para proteger la información en tránsito y en reposo, según su nivel de clasificación.",
+    "Se deberán registrar, monitorear y gestionar eventos e incidentes de seguridad conforme a los lineamientos del SGSI.",
+    "Los cambios en sistemas, aplicaciones e infraestructura deberán evaluarse considerando riesgos de seguridad antes de su implementación.",
+    "Se deberán ejecutar respaldos y pruebas de restauración para garantizar continuidad y disponibilidad de la información crítica.",
+    "Se deberán realizar capacitaciones y acciones de concientización periódicas para fortalecer la cultura de seguridad.",
+    "Todo proveedor o tercero dentro del alcance deberá cumplir requisitos de seguridad acordes al nivel de riesgo y criticidad del servicio.",
+    "Se mantendrá control documental de políticas y evidencias de cumplimiento, garantizando trazabilidad y mejora continua."
+  ],
+  "versiones": [
+    {
+      "v": "1.0",
+      "f": "2026-02-27",
+      "d": "Emisión inicial de la Política de Seguridad de la Información.",
+      "r": "Responsable del SGSI"
+    }
+  ]
+}
