@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Políticas SGSI – Dashboard</title>
+  <meta name="description"
+    content="Sistema de Gestión de Seguridad de la Información. Crea, importa y administra políticas institucionales." />
+  <script type="module" crossorigin src="/SGSI/assets/index-ChmusLQ7.js"></script>
+  <link rel="modulepreload" crossorigin href="/SGSI/assets/storage-CtJPJEos.js">
+  <link rel="stylesheet" crossorigin href="/SGSI/assets/index-BmAneRbD.css">
+</head>
+
+<body>
+
+  <!-- Background orbs -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ═══ HEADER ═══ -->
+    <header class="appHeader">
+      <div class="brand">
+        <div class="logo" aria-label="SG">SG</div>
+        <div class="brand-text">
+          <h1>Políticas del SGSI</h1>
+          <p class="subtitle">Crear, importar y administrar políticas institucionales</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="btn-settings" id="btnSettings" aria-label="Ajustes">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+          </svg>
+          Ajustes
+        </button>
+      </div>
+    </header>
+
+    <!-- ═══ QUICK ACTIONS ═══ -->
+    <p class="section-label">Acciones rápidas</p>
+
+    <div class="quick-actions">
+
+      <div class="action-card">
+        <div class="action-icon create">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="12" y1="18" x2="12" y2="12" />
+            <line x1="9" y1="15" x2="15" y2="15" />
+          </svg>
+        </div>
+        <div class="action-body">
+          <h3>Crear Política</h3>
+          <p>Genera una nueva política desde plantilla.</p>
+        </div>
+        <button class="btn btn-primary" id="btnCrear">Crear</button>
+      </div>
+
+      <div class="action-card">
+        <div class="action-icon import">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 16 12 12 8 16" />
+            <line x1="12" y1="12" x2="12" y2="21" />
+            <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" />
+          </svg>
+        </div>
+        <div class="action-body">
+          <h3>Importar Política</h3>
+          <p>Carga un archivo .json para continuar editando.</p>
+        </div>
+        <button class="btn btn-success" id="btnImport">Importar</button>
+        <input type="file" id="fileInput" accept="application/json" hidden />
+      </div>
+
+
+    </div>
+
+    <!-- ═══ STATS BAR ═══ -->
+    <div class="stats-bar">
+      <div class="stat">
+        <span class="stat-value" id="statTotal">0</span>
+        <span class="stat-label">Total</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-value approved" id="statAprobadas">0</span>
+        <span class="stat-label">Aprobadas</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-value draft" id="statBorradores">0</span>
+        <span class="stat-label">Borradores</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-value archived" id="statArchivadas">0</span>
+        <span class="stat-label">Archivadas</span>
+      </div>
+    </div>
+
+    <!-- ═══ HISTORY TABLE ═══ -->
+    <section class="history-section" id="historySection">
+
+      <div class="history-header">
+        <p class="section-label" style="margin:0;">Historial de políticas realizadas</p>
+        <span class="record-count" id="recordCount">0 registros</span>
+      </div>
+
+      <div class="table-controls">
+        <div class="search-wrap">
+          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <input type="text" id="searchInput" class="search-input" placeholder="Buscar por nombre o código…"
+            autocomplete="off" />
+        </div>
+        <select id="filterStatus" class="filter-select">
+          <option value="">Todos los estados</option>
+          <option value="Aprobada">Aprobada</option>
+          <option value="Borrador">Borrador</option>
+          <option value="Archivada">Archivada</option>
+        </select>
+        <button class="btn-sort" id="btnSort">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="6" x2="20" y2="6" />
+            <line x1="4" y1="12" x2="14" y2="12" />
+            <line x1="4" y1="18" x2="8" y2="18" />
+          </svg>
+          <span id="sortLabel">Más reciente</span>
+        </button>
+      </div>
+
+      <div class="table-wrap">
+        <table class="history-table" id="historyTable">
+          <thead>
+            <tr>
+              <th>Política</th>
+              <th class="col-code">Código</th>
+              <th class="col-ver">Ver.</th>
+              <th class="col-date">Fecha</th>
+              <th class="col-status">Estado</th>
+              <th class="col-actions">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="historyBody"></tbody>
+        </table>
+        <div class="empty-state" id="emptyState" hidden>
+          <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+          </svg>
+          <p>No se encontraron políticas con ese criterio.</p>
+        </div>
+      </div>
+
+    </section>
+
+  </div><!-- /.wrap -->
+
+  <!-- Toast -->
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+  <!-- Delete confirm modal -->
+  <div class="modal-overlay" id="modalOverlay" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="3 6 5 6 21 6" />
+          <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+          <path d="M10 11v6" />
+          <path d="M14 11v6" />
+          <path d="M9 6V4h6v2" />
+        </svg>
+      </div>
+      <h3 id="modalTitle">Eliminar política</h3>
+      <p id="modalMsg">¿Estás seguro de que deseas eliminar esta política?</p>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" id="modalCancel">Cancelar</button>
+        <button class="btn btn-danger" id="modalConfirm">Sí, eliminar</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
