@@ -1,19 +1,15 @@
-import { defineConfig } from 'vite';
-import { resolve } from 'path';
+import { defineConfig } from 'vite'
+import { resolve } from 'path'
 
 export default defineConfig({
-    base: './',
-    root: '.',
+    base: '/SGSI/',
     build: {
         outDir: 'dist',
         rollupOptions: {
             input: {
-                main: resolve(__dirname, 'index.html'),
+                index: resolve(__dirname, 'index.html'),
                 editor: resolve(__dirname, 'editor.html'),
             },
         },
     },
-    server: {
-        open: '/index.html',
-    },
-});
+})
